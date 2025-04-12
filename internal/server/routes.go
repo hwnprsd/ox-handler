@@ -30,7 +30,14 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 	e.GET("/health", s.healthHandler)
 
+	e.GET("/tokens", s.getTokensHandler)
+
 	e.GET("/websocket", s.websocketHandler)
+	orderV1 := e.Group("/order/v1")
+	orderV1.POST("/sig-data", s.getSigDataV1Handler)
+	orderV1.POST("/signature", s.submitSignatureHandler)
+	orderV1.GET("/id/:id", s.getOrderByIdHandler)
+	orderV1.GET("/address/:address", s.getAllOrdersByAddressHandler)
 
 	return e
 }

@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"handler/internal/server"
+	"github.com/hwnprsd/ox-handler/internal/server"
 )
 
 func gracefulShutdown(apiServer *http.Server, done chan bool) {

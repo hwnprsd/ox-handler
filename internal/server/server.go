@@ -9,7 +9,7 @@ import (
 
 	_ "github.com/joho/godotenv/autoload"
 
-	"handler/internal/database"
+	"github.com/hwnprsd/ox-handler/internal/database"
 )
 
 type Server struct {
