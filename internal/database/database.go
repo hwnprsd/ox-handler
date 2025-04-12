@@ -51,12 +51,17 @@ func New() Service {
 		return dbInstance
 	}
 	// connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable&search_path=%s", username, password, host, port, database, schema)
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=require TimeZone=Asia/Kolkata",
+	sslMode := "require"
+	if os.Getenv("APP_ENV") == "local" {
+		sslMode = "disable"
+	}
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=Asia/Kolkata",
 		host,
 		username,
 		password,
 		database,
 		port,
+		sslMode,
 	)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
