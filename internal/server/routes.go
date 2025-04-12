@@ -65,7 +65,8 @@ func (s *Server) healthHandler(c echo.Context) error {
 func (s *Server) websocketHandler(c echo.Context) error {
 	w := c.Response().Writer
 	r := c.Request()
-	socket, err := websocket.Accept(w, r, nil)
+	options := &websocket.AcceptOptions{InsecureSkipVerify: true}
+	socket, err := websocket.Accept(w, r, options)
 	if err != nil {
 		log.Printf("could not open websocket: %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
